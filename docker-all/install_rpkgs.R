@@ -1,0 +1,22 @@
+library(BiocManager)
+options(repos = c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/"))
+options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")
+install('genomation')
+install('GenomicRanges')
+install('methylKit')
+install('org.Hs.eg.db')
+install('clusterProfiler')
+install('DOSE')
+install('topGO')
+install('RnBeads')
+install('RnBeads.hg19')
+install("ComplexHeatmap")
+
+#顺便安装texlive
+#install.packages("echarts4r")
+# install.packages("tinytex")
+# install.packages("rmarkdown")
+# tinytex::install_tinytex(dir = "/usr/bin")
+# tlmgr(c("option","repository",
+#         "https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet"))
+# tinytex::tlmgr_install('scheme-full')

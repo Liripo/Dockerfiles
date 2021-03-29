@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:4.0.3
+FROM rocker/tidyverse:4.0.4
 
 #安装所需R包,安装过程很糟糕，才写成这样的。
 #还有怎么解决安装github上的东西的网络问题？？下到本地还有依赖也要解决。
