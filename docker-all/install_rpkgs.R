@@ -1,17 +1,32 @@
 library(BiocManager)
 options(repos = c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/"))
 options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")
-install('genomation')
-install('GenomicRanges')
-install('methylKit')
-install('org.Hs.eg.db')
-install('clusterProfiler')
-install('DOSE')
-install('topGO')
-install('RnBeads')
-install('RnBeads.hg19')
-install("ComplexHeatmap")
 
+install_cran <- function(pkg,try_install_number = 3) {
+  for (i in seq(1:try_install_number)) {
+    if (!requireNamespace(pkg,quietly = T)) {
+      install.packages(pkg,quiet = T)
+    }
+  }
+  if (!requireNamespace(pkg))stop(paste0(pkg,":下载失败！"))
+}
+
+install_bio <- function(pkg,try_install_number = 3) {
+  for (i in seq(1:try_install_number)) {
+    if (!requireNamespace(pkg,quietly = T)) {
+      BiocManager::install(pkg,update = F)
+    }
+  }
+  if (!requireNamespace(pkg))stop(paste0(pkg,":下载失败！"))
+}
+install_bio('GenomicRanges')
+install_bio('org.Hs.eg.db')
+install_bio('clusterProfiler')
+install_bio('DOSE')
+install_bio('topGO')
+install_bio("ComplexHeatmap")
+install_cran("rmarkdown")
+install_cran("echart4r")
 #顺便安装texlive
 #install.packages("echarts4r")
 # install.packages("tinytex")
