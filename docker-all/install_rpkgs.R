@@ -11,7 +11,7 @@ install_cran <- function(pkg,try_install_number = 3) {
   if (!requireNamespace(pkg))stop(paste0(pkg,":下载失败！"))
 }
 
-install_bio <- function(pkg,try_install_number = 3) {
+install_bio <- function(pkg,try_install_number = 10) {
   for (i in seq(1:try_install_number)) {
     if (!requireNamespace(pkg,quietly = T)) {
       BiocManager::install(pkg,update = F)
