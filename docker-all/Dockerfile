@@ -3,11 +3,8 @@ FROM rocker/tidyverse:4.0.4
 #https://stackoverflow.com/questions/2953081/how-can-i-write-a-heredoc-to-a-file-in-bash-script
 COPY bashrc.txt /
 RUN cat bashrc.txt >> /etc/profile && rm bashrc.txt
-COPY install_rpkgs.R /
-RUN Rscript install_rpkgs.R && rm install_rpkgs.R
 
-COPY requirements.txt /
-##python模块安装
+
 RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
 		&& apt-get clean \
 		&& apt-get update \
@@ -18,7 +15,14 @@ RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list 
 	    && ln -s /usr/bin/python3 /usr/bin/python \
 		&& pip install pip -U \
 		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
-	    && pip install -r requirements.txt && rm requirements.txt
+		&& apt-get install -y libbz2-dev
+
+COPY install_rpkgs.R /
+RUN Rscript install_rpkgs.R && rm install_rpkgs.R
+
+COPY requirements.txt /
+##python模块安装
+
 		
 
 	
