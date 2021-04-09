@@ -1,9 +1,4 @@
 FROM rocker/tidyverse:4.0.4
-#pretty PS1，http://bashrcgenerator.com/
-#https://stackoverflow.com/questions/2953081/how-can-i-write-a-heredoc-to-a-file-in-bash-script
-COPY bashrc.txt /
-RUN cat bashrc.txt >> /etc/profile && rm bashrc.txt
-COPY sources.list /
 
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 		&& mv sources.list /etc/apt/ \
@@ -12,7 +7,12 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 	    && apt-get install -y python3-pip \
 	    && ln -s /usr/bin/pip3 /usr/bin/pip \
 	    && ln -s /usr/bin/python3 /usr/bin/python \
-		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+		&& apt-get install -y --no-install-recommends \
+		pandoc \
+		less \
+		&& apt-get clean \
+	    && rm -rf /var/lib/apt/lists/*
 		
 # Update apt-get,bioconductor依赖[参考](https://github.com/Bioconductor/bioconductor_docker/blob/master/Dockerfile)
 RUN apt-get update \
@@ -104,15 +104,23 @@ RUN apt-get update \
 	biber \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
-
-
+	
+#时区上海
+ENV TZ=Asia/Shanghai
 COPY install_rpkgs.R /
 RUN Rscript install_rpkgs.R && rm install_rpkgs.R
 
+
 COPY requirements.txt /
 ##python模块安装
+pip install -r requirements.txt && rm requirements.txt
+#pretty PS1，http://bashrcgenerator.com/
+#https://stackoverflow.com/questions/2953081/how-can-i-write-a-heredoc-to-a-file-in-bash-script
+COPY bashrc.txt /
+RUN cat bashrc.txt >> /etc/profile && rm bashrc.txt
+COPY sources.list /
 
-		
+
 
 	
 
