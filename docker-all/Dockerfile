@@ -9,7 +9,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 	    && ln -s /usr/bin/python3 /usr/bin/python \
 		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
 		&& apt-get install -y --no-install-recommends \
-		pandoc \
 		less \
 		&& apt-get clean \
 	    && rm -rf /var/lib/apt/lists/*

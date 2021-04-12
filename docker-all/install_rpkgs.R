@@ -20,14 +20,14 @@ install_bio <- function(pkg,try_install_number = 10,update = F,method = "wget",e
   }
   if (!requireNamespace(pkg))stop(paste0(pkg,":下载失败！"))
 }
-install_bio("genomation")
-install_bio('GenomicRanges')
-install_bio('org.Hs.eg.db')
-install_bio('clusterProfiler')
-install_bio('DOSE')
-install_bio('topGO')
+#install_bio("genomation")
+#install_bio('GenomicRanges')
+#install_bio('org.Hs.eg.db')
+#install_bio('clusterProfiler')
+#install_bio('DOSE')
+#install_bio('topGO')
 install_bio("ComplexHeatmap")
-install_bio("Organism.dplyr")
+#install_bio("Organism.dplyr")
 
 
 install_cran("data.table")
@@ -49,3 +49,4 @@ install_cran("survival")
 install_cran("cli")
 install_cran("bench")
 install_cran("writexl")
+install_cran("flextable")
