@@ -1,5 +1,7 @@
 FROM rocker/tidyverse:4.0.4
 
+
+COPY sources.list /
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 		&& mv sources.list /etc/apt/ \
 		&& apt-get update \
@@ -117,7 +119,6 @@ pip install -r requirements.txt && rm requirements.txt
 #https://stackoverflow.com/questions/2953081/how-can-i-write-a-heredoc-to-a-file-in-bash-script
 COPY bashrc.txt /
 RUN cat bashrc.txt >> /etc/profile && rm bashrc.txt
-COPY sources.list /
 
 
 
