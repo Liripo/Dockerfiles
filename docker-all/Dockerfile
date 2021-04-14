@@ -6,6 +6,10 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 		&& mv sources.list /etc/apt/ \
 		&& apt-get update \
 		&& apt-get install -y vim \
+		#安装bsdtar程序以及ll命令等
+		&& apt-get install -y --no-install-recommends 
+		libarchive-tools \
+		ghostscript \
 	    && apt-get install -y python3-pip \
 	    && ln -s /usr/bin/pip3 /usr/bin/pip \
 	    && ln -s /usr/bin/python3 /usr/bin/python \
