@@ -6,18 +6,17 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 		&& mv sources.list /etc/apt/ \
 		&& apt-get update \
 		&& apt-get install -y vim \
-		#安装bsdtar程序以及ll命令等
-		&& apt-get install -y --no-install-recommends 
+		&& apt-get install -y --no-install-recommends \ 
 		libarchive-tools \
 		ghostscript \
-	    && apt-get install -y python3-pip \
-	    && ln -s /usr/bin/pip3 /usr/bin/pip \
-	    && ln -s /usr/bin/python3 /usr/bin/python \
-		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
-		&& apt-get install -y --no-install-recommends \
+		fontconfig \
+	    	python3-pip \
 		less \
+	    	&& ln -s /usr/bin/pip3 /usr/bin/pip \
+	    	&& ln -s /usr/bin/python3 /usr/bin/python \
+		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
 		&& apt-get clean \
-	    && rm -rf /var/lib/apt/lists/*
+	    	&& rm -rf /var/lib/apt/lists/*
 		
 # Update apt-get,bioconductor依赖[参考](https://github.com/Bioconductor/bioconductor_docker/blob/master/Dockerfile)
 RUN apt-get update \
@@ -117,15 +116,12 @@ RUN Rscript install_rpkgs.R && rm install_rpkgs.R
 
 
 COPY requirements.txt /
-##python模块安装
-pip install -r requirements.txt && rm requirements.txt
 #pretty PS1，http://bashrcgenerator.com/
 #https://stackoverflow.com/questions/2953081/how-can-i-write-a-heredoc-to-a-file-in-bash-script
 COPY bashrc.txt /
-RUN cat bashrc.txt >> /etc/profile && rm bashrc.txt
-
-
-
-	
-
-		
+#安装字体，微软雅黑，宋体
+COPY fonts/* /usr/share/fonts/
+RUN cat bashrc.txt >> /etc/profile && rm bashrc.txt && \
+	fc-cache -vf && pip install -r requirements.txt && rm requirements.txt
+#参考https://stackoverflow.com/questions/29021704/difference-between-environment-in-dockerfile-run-and-interactive-shell-on-a-runn
+ENV BASH_ENV /etc/profile

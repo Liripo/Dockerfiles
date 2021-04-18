@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 options(repos = c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/"))
 options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")
 #最大300s
@@ -51,3 +50,5 @@ install_cran("cli")
 install_cran("bench")
 install_cran("writexl")
 install_cran("flextable")
+install_cran("kableExtra")
+install_cran("showtext")
