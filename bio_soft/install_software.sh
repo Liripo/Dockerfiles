@@ -12,7 +12,7 @@ wget http://opengene.org/fastp/fastp /usr/local/bin/
 chmod a+x /usr/local/bin/fastp
 #seqkit
 wget http://app.shenwei.me/data/seqkit/seqkit_linux_amd64.tar.gz
-tar -zxvf seqkit_linux_amd64.tar.gz /usr/local/bin
+tar -zxvf seqkit_linux_amd64.tar.gz -C /usr/local/bin && rm seqkit_linux_amd64.tar.gz
 #gatk
 unzip gatk-4.2.0.0.zip -d /opt/ && rm gatk-4.2.0.0.zip
 #sention
@@ -29,5 +29,11 @@ if ! (
         -e 'CPAN::HandleConfig->commit()'
 fi
 perl -MCPAN -e "install DBI"
-cpan App::cpanminus
 cpanm Archive::Zip
+#不加数据库功能
+#cpanm DBD::mysql
+cpanm PerlIO::gzip
+cpanm Bio::DB::BigFile
+#下载API
+unzip ensembl-vep-release-103.zip -d /opt/ && cd /opt/ensembl-vep-release-103 && perl INSTALL.pl --AUTO a
+cd / && rm ensembl-vep-release-103.zip
