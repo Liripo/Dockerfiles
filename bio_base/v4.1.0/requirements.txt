@@ -1,0 +1,6 @@
+pandas
+radian
+requests
+bs4
+rich
+arrow

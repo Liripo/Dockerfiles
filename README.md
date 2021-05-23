@@ -1,8 +1,7 @@
-# liripo-dockerfile
-我的docker版本构建仓库。
+# dockerfile
+- bio_base是在rocker/tidyverse镜像上增加所有biocondocutor包所需要的系统依赖以及一些常用R包的。
 
-bio_base文件夹下是用来更新biocondocutor所需要的依赖包以及一些常用R包的**
+- **bio_tex**在bio_base基础下增加Texlive。
 
-**liripo-v1是在Rstudio的基础上封装了shiny软件**
+- bio_soft是在bio_base基础下增加生信软件。（当然，安装软件很大的话大基本使用离线状态，这些文件不会上传到此仓库）
 
-**bio_tex**文件夹下为docker-all下版本增加Texlive

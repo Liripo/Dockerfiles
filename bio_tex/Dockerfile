@@ -1,4 +1,4 @@
-FROM bio_base:v0.1
+FROM liripo/bio_base:v4.1.0
 
 COPY texlive2021-20210325.iso /iso/
 COPY texlive.profile /tmp
