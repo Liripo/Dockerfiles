@@ -1,12 +1,17 @@
 FROM rocker/tidyverse:4.1.0
 LABEL maintainer="liripo(liripo@qq.com)"
 
+ENV PS1="\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /` \n \[\033[35m\]$\[\033[00m\] "
 COPY sources.list /
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 		&& mv sources.list /etc/apt/ \
 		&& apt-get update \
 		&& apt-get install -y vim \
-		&& apt-get install -y --no-install-recommends \ 
+		&& apt-get install -y --no-install-recommends \
+		#编程连字字体
+		fonts-firacode \
+		#使用思源黑体，<https://www.fyears.org/2017/04/source-han-sans-and-source-han-serif.html>
+		fonts-noto-cjk \
 		libarchive-tools \
 		ghostscript \
 		fontconfig \
@@ -15,7 +20,11 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 	    && ln -s /usr/bin/python3 /usr/bin/python \
 		&& pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
 		&& apt-get clean \
-	    && rm -rf /var/lib/apt/lists/*
+	    && rm -rf /var/lib/apt/lists/* \
+		&& fc-cache -vf
+#安装字体，微软雅黑，宋体
+#COPY fonts/* /usr/share/fonts/
+#RUN fc-cache -vf
 		
 # Update apt-get,bioconductor依赖[参考](https://github.com/Bioconductor/bioconductor_docker/blob/master/Dockerfile)
 RUN apt-get update \
@@ -115,6 +124,4 @@ RUN Rscript install_rpkgs.R && rm install_rpkgs.R
 
 #python模块
 COPY requirements.txt /
-#安装字体，微软雅黑，宋体
-COPY fonts/* /usr/share/fonts/
-RUN fc-cache -vf && pip install -r requirements.txt && rm requirements.txt
+RUN pip install -r requirements.txt && rm requirements.txt
