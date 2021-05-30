@@ -57,8 +57,9 @@ install_cran("bench")
 install_cran("writexl")
 install_cran("showtext")
 install_cran("downloadthis")
-#表格包,DT默认已经有了
+#表格包
 install_cran("reactable")
+install_cran("DT")
 install_cran("kableExtra")
 #ppt
 install_cran("xaringan")
