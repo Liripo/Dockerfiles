@@ -1,4 +1,1 @@
 pandas
-requests
-bs4
-rich

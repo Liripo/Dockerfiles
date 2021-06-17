@@ -39,19 +39,21 @@ install_bio("ComplexHeatmap")
 
 
 install_cran("data.table")
-install_cran("dtplyr")
-install_cran("Seurat")
-install_cran("optparse")
+#install_cran("dtplyr")
+#install_cran("Seurat")
+#install_cran("optparse")
+#install_cran("argparser")
 install_cran("rmarkdown")
 install_cran("tinytex")
 install_cran("formatR")
 install_cran("patchwork")
 install_cran("rvest")
 install_cran("furrr")
-install_cran("ggsignif")
-install_cran("ggpubr")
+# install_cran("ggsignif")
+# install_cran("ggpubr")
 install_cran("gridExtra")
 #install_cran("cli")
+#install_cran("whereami")
 #比较性能
 install_cran("bench")
 install_cran("writexl")
@@ -61,15 +63,15 @@ install_cran("downloadthis")
 install_cran("reactable")
 install_cran("DT")
 install_cran("kableExtra")
-#ppt
-install_cran("xaringan")
-#xaringanExtra不在cran上
-install_cran("xaringanthemer")
+# #ppt
+# install_cran("xaringan")
+# #xaringanExtra不在cran上
+# install_cran("xaringanthemer")
 #js图
 install_cran("echarts4r")
 install_cran("plotly")
 install_cran("dygraphs")
 install_cran("heatmaply") #交互式热图，相较于d3heatmap具有速度优势
-#生存分析
-install_cran("survminer")
-install_cran("survival")
+# #生存分析
+# install_cran("survminer")
+# install_cran("survival")
