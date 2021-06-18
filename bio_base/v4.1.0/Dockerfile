@@ -1,10 +1,11 @@
 FROM rocker/tidyverse:4.1.0
 LABEL maintainer="liripo(liripo@qq.com)"
 
-RUN PStmp="\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]\`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /\` \n \[\033[35m\]🐳\[\033[00m\] " && echo "PS1=\"$PStmp\"" >>/root/.bashrc && echo "PS1=\"$PStmp\"" >>/etc/profile
-COPY sources.list /
+COPY copy_files /tmp
+RUN cat /tmp/bashrc >>~/.bashrc && rm /tmp/bashrc && cat /tmp/profile >> /etc/profile && rm /tmp/profile
+
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
-		&& mv sources.list /etc/apt/ \
+		&& mv /tmp/sources.list /etc/apt/ \
 		&& apt-get update \
 		&& apt-get install -y vim \
 		# 不要将推荐的软件包视为安装的依赖项
@@ -107,8 +108,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 #RUN fc-cache -vf
 
 #python模块
-COPY requirements.txt /
-RUN pip install -r requirements.txt && rm requirements.txt	
+RUN pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
 #时区上海
 ENV TZ=Asia/Shanghai
 COPY install_rpkgs.R /
