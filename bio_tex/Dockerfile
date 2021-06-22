@@ -7,8 +7,8 @@ RUN cd /iso \
 	#安装tex
 	&& ./install-tl -profile /tmp/texlive.profile \
 	&& rm -rf /iso \
-	&& rm -rf /var/lib/apt/lists/*
+	#删除tex源码，文档，文档占3G，源码400M，字体3G不能删除
+	&& rm -rf /usr/local/texlive/2021/texmf-dist/doc/ \
+	&& rm -rf /usr/local/texlive/2021/texmf-dist/source
 ENV PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH
-ENV MANPATH=/usr/local/texlive/2021/texmf-dist/doc/man:$MANPATH
-ENV INFOPATH=/usr/local/texlive/2021/texmf-dist/doc/info:$INFOPATH
 RUN echo "PATH=${PATH}" >> "${R_HOME}/etc/Renviron"
