@@ -2,7 +2,8 @@ FROM rocker/tidyverse:4.1.0
 LABEL maintainer="liripo(liripo@qq.com)"
 
 COPY copy_files /tmp
-RUN cat /tmp/bashrc >>~/.bashrc && rm /tmp/bashrc && cat /tmp/profile >> /etc/profile && rm /tmp/profile
+RUN cat /tmp/bashrc >>~/.bashrc && rm /tmp/bashrc && cat /tmp/profile >> /etc/profile && rm /tmp/profile && \
+    cp ~/.bashrc /.bashrc && chmod 777 /.bashrc
 
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bat \
 		&& mv /tmp/sources.list /etc/apt/ \
