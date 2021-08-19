@@ -8,7 +8,7 @@ apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 #fastp
-wget http://opengene.org/fastp/fastp /usr/local/bin/
+wget -P /usr/local/bin/http://opengene.org/fastp/fastp
 chmod a+x /usr/local/bin/fastp
 #seqkit,取消网络
 #wget http://app.shenwei.me/data/seqkit/seqkit_linux_amd64.tar.gz
